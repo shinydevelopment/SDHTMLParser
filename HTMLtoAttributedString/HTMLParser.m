@@ -50,7 +50,6 @@ typedef NSInteger HTMLParserSupportedTags;
   // Start with an empty attributed string.
   NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@""];
 
-
   // Get the regex from a class method so it can be reused.
   NSRegularExpression *splitRegex = [HTMLParser HTMLSplittingRegularExpression];
 
@@ -86,7 +85,6 @@ typedef NSInteger HTMLParserSupportedTags;
       capturedURL = [NSURL URLWithString:URLString];
     }
 
-
     // Act appropriately based on tag type
     HTMLParserSupportedTags tagType = 0;
     NSRange tagCaptureRange = [result rangeAtIndex:RegexCaptureRangeIndexTagName];
@@ -94,9 +92,9 @@ typedef NSInteger HTMLParserSupportedTags;
     if (tagCaptureRange.length != 0) {
       NSString *tagName = [htmlString substringWithRange:tagCaptureRange];
 
-      if ([tagName isEqualToString:@"b"]) {
+      if ([tagName isEqualToString:@"strong"] || [tagName isEqualToString:@"b"]) {
         tagType = HTMLParserSupportedTagBold;
-      } else if ([tagName isEqualToString:@"i"]) {
+      } else if ([tagName isEqualToString:@"em"] || [tagName isEqualToString:@"i"]) {
         tagType = HTMLParserSupportedTagItalic;
       } else if ([tagName isEqualToString:@"u"]) {
         tagType = HTMLParserSupportedTagUnderline;
